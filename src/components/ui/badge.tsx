@@ -12,6 +12,13 @@ const badgeVariants = cva(
         secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
+        serviceBlue: "bg-service-blue/10 border-service-blue/20 text-service-blue",
+        serviceOrange: "bg-service-orange/10 border-service-orange/20 text-service-orange",
+        serviceEmerald: "bg-service-emerald/10 border-service-emerald/20 text-service-emerald",
+        serviceRose: "bg-service-rose/10 border-service-rose/20 text-service-rose",
+        serviceViolet: "bg-service-violet/10 border-service-violet/20 text-service-violet",
+        serviceCyan: "bg-service-cyan/10 border-service-cyan/20 text-service-cyan",
+        accent: "bg-accent/10 border-accent/20 text-accent",
       },
     },
     defaultVariants: {
@@ -22,8 +29,11 @@ const badgeVariants = cva(
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
-}
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ className, variant, ...props }, ref) => {
+    return <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />;
+  }
+);
+Badge.displayName = "Badge";
 
-export { Badge, badgeVariants };
+export { Badge };
